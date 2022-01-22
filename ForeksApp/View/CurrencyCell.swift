@@ -8,7 +8,8 @@
 import UIKit
 
 class CurrencyCell: UITableViewCell {
-
+    @IBOutlet weak var currencyNameLabelField: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

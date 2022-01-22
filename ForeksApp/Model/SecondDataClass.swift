@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+struct Welcome: Codable {
+    let l: [L]
+    let z: String
+}
+
+// MARK: - L
+struct L: Codable {
+    let tke, clo, pdd, las: String
+}
