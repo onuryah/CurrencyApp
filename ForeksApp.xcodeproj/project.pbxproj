@@ -18,6 +18,7 @@
 		4AD7CBA0279A30D700367150 /* UrlClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD7CB9F279A30D700367150 /* UrlClass.swift */; };
 		4AF5A5D8279C26B200FB1364 /* SecondDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF5A5D7279C26B200FB1364 /* SecondDataClass.swift */; };
 		4AF5A5DA279C2A8C00FB1364 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF5A5D9279C2A8C00FB1364 /* WebService.swift */; };
+		4AF5A5DC279CB0A600FB1364 /* UserSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF5A5DB279CB0A600FB1364 /* UserSingleton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		4AD7CB9F279A30D700367150 /* UrlClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlClass.swift; sourceTree = "<group>"; };
 		4AF5A5D7279C26B200FB1364 /* SecondDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondDataClass.swift; sourceTree = "<group>"; };
 		4AF5A5D9279C2A8C00FB1364 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		4AF5A5DB279CB0A600FB1364 /* UserSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSingleton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				4AD7CB9D279A2F9400367150 /* DataClass.swift */,
 				4AD7CB9F279A30D700367150 /* UrlClass.swift */,
 				4AF5A5D7279C26B200FB1364 /* SecondDataClass.swift */,
+				4AF5A5DB279CB0A600FB1364 /* UserSingleton.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 			files = (
 				4AF5A5D8279C26B200FB1364 /* SecondDataClass.swift in Sources */,
 				4AD7CB9C279A2DE700367150 /* CurrencyCell.swift in Sources */,
+				4AF5A5DC279CB0A600FB1364 /* UserSingleton.swift in Sources */,
 				4AF5A5DA279C2A8C00FB1364 /* WebService.swift in Sources */,
 				4A6F75532799DE6900F995CE /* ViewController.swift in Sources */,
 				4AD7CBA0279A30D700367150 /* UrlClass.swift in Sources */,

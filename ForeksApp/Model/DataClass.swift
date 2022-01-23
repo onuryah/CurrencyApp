@@ -8,7 +8,7 @@
 import Foundation
 
 struct Currency: Decodable, Encodable {
-    let mypageDefaults: [MypageDefault]
+    var mypageDefaults: [MypageDefault]
     let mypage: [Mypage]
 }
 

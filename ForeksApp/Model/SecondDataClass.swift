@@ -14,5 +14,5 @@ struct Welcome: Codable {
 
 // MARK: - L
 struct L: Codable {
-    let tke, clo, pdd, las: String
+    let tke, clo, pdd, las, ddi, low, hig, buy, sel, pdc, cei, flo, gco: String?
 }
