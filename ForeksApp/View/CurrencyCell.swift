@@ -26,7 +26,7 @@ class CurrencyCell: UITableViewCell {
     }
     
     fileprivate func addRadius(){
-        lasDifImageView.layer.cornerRadius = 25
+        lasDifImageView.layer.cornerRadius = 13
     }
 
 }
