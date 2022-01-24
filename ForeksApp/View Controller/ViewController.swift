@@ -122,6 +122,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UIPickerVi
         case "las":cell.firstQueryLabelField.text = currencyDetails?.l[indexPath.row].las
         case "pdd":cell.firstQueryLabelField.text = currencyDetails?.l[indexPath.row].pdd
             if let string = currencyDetails?.l[indexPath.row].pdd{
+                cell.firstQueryLabelField.text = "%"+string
                 let formattedStr = string.replacingOccurrences(of: ",", with: ".")
                 if let double = Double(String(formattedStr)){
                     if double > 0{
@@ -162,6 +163,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UIPickerVi
         case "las":cell.seconQueryLabelField.text = currencyDetails?.l[indexPath.row].las
         case "pdd":cell.seconQueryLabelField.text = currencyDetails?.l[indexPath.row].pdd
             if let string = currencyDetails?.l[indexPath.row].pdd{
+                cell.seconQueryLabelField.text = "%"+string
                 let formattedStr = string.replacingOccurrences(of: ",", with: ".")
                 if let double = Double(String(formattedStr)){
                     if double > 0{
