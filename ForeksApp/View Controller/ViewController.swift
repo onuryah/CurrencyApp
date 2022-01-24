@@ -15,7 +15,6 @@ class ViewController: UIViewController {
     var currencyDetails : Welcome?
     var followerCurrencyArray : Currency?
     var followerDetails : Welcome?
-    
     var repeatTimer : Timer?
     var selectedRow = 0{
         didSet{
@@ -32,9 +31,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setDelegates()
+        setDelegatesAndColour()
         fetchData()
         repeatSettings()
+
     }
     @IBAction func popUpButtonClicked(_ sender: Any) {
         repeatTimer?.invalidate()
@@ -185,24 +185,45 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UIPickerVi
             cell.firstQueryLabelField.text = currencyDetails?.l[indexPath.row].las
         }
         cell.cloLabelField.text = currencyDetails?.l[indexPath.row].clo
+        if currencyDetails?.l[indexPath.row].clo != followerDetails?.l[indexPath.row].clo{
+            cell.cloLabelField.font = UIFont.systemFont(ofSize: 22)
+            
+        }else {
+            cell.cloLabelField.font = UIFont.systemFont(ofSize: 15)
+        }
+        
+        
+        
+        
         
         if let string = self.currencyDetails?.l[indexPath.row].las {
-            let formattedStr = string.replacingOccurrences(of: ",", with: ".")
-            if let follower = self.followerDetails?.l[indexPath.row].las{
-                let formattedFollower = follower
-                
-                
-                
-
+            let formatted = string.replacingOccurrences(of: ".", with: "")
+            let formattedStr = formatted.replacingOccurrences(of: ",", with: ".")
+            if let double = Double(String(formattedStr)){
+                if let follower = self.followerDetails?.l[indexPath.row].las{
+                    let formattedFollower = follower.replacingOccurrences(of: ".", with: "")
+                    let formattedStrFollower = formattedFollower.replacingOccurrences(of: ",", with: ".")
+                    if let doubleFollower = Double(String(formattedStrFollower)){
+                        if double > doubleFollower{
+                            cell.lasDifImageView.image = UIImage(named: "artis")
+                        }else if double < doubleFollower{
+                            cell.lasDifImageView.image = UIImage(named: "azalis")
+                        }else{
+                            cell.lasDifImageView.image = UIImage(named: "sabit")
+                        }
+                    }
+                }
             }
         }
         
         
+        
         return cell
     }
-    fileprivate func setDelegates(){
+    fileprivate func setDelegatesAndColour(){
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        tableView.backgroundColor = .black
     }
     
     func fetchData(){
@@ -231,8 +252,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UIPickerVi
     }
     
     @objc func repeating(){
-        self.currencyArray = self.followerCurrencyArray
-        self.currencyDetails = self.followerDetails
+        self.followerCurrencyArray = self.currencyArray
+        self.followerDetails = self.currencyDetails
         fetchData()
         
     }
