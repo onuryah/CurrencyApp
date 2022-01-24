@@ -34,7 +34,6 @@ class ViewController: UIViewController {
         setDelegatesAndColour()
         fetchData()
         repeatSettings()
-
     }
     @IBAction func popUpButtonClicked(_ sender: Any) {
         repeatTimer?.invalidate()
@@ -54,11 +53,9 @@ class ViewController: UIViewController {
         pickerView.centerYAnchor.constraint(equalTo: vc.view.centerYAnchor).isActive = true
         vc.view.addSubview(pickerView)
         
-        
         let alert = UIAlertController(title: "Test", message: "Select", preferredStyle: .actionSheet)
         alert.popoverPresentationController?.sourceView = popUpButton
         alert.popoverPresentationController?.sourceRect = popUpButton.bounds
-        
         alert.setValue(vc, forKey: "contentViewController")
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { UIAlertAction in
             self.repeatSettings()
@@ -83,15 +80,9 @@ class ViewController: UIViewController {
                     UserSingleton.keyTwo = secondSelectedKey
                 }
             }
-            
-            
         }))
         self.present(alert, animated: true, completion: nil)
-        
     }
-    
-
-
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource{
@@ -117,18 +108,31 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UIPickerVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let elma = self.currencyArray?.mypageDefaults.count else{return 0}
-            return elma
+        guard let rowCount = self.currencyArray?.mypageDefaults.count else{return 0}
+            return rowCount
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CurrencyCell
         cell.currencyNameLabelField.text = currencyArray?.mypageDefaults[indexPath.row].cod
         
-        
+        cell.seconQueryLabelField.textColor = .white
+        cell.firstQueryLabelField.textColor = .white
         
         switch UserSingleton.keyOne {
         case "las":cell.firstQueryLabelField.text = currencyDetails?.l[indexPath.row].las
         case "pdd":cell.firstQueryLabelField.text = currencyDetails?.l[indexPath.row].pdd
+            if let string = currencyDetails?.l[indexPath.row].pdd{
+                let formattedStr = string.replacingOccurrences(of: ",", with: ".")
+                if let double = Double(String(formattedStr)){
+                    if double > 0{
+                        cell.firstQueryLabelField.textColor = UIColor.green
+                    }else if double < 0{
+                        cell.firstQueryLabelField.textColor = UIColor.red
+                    }else{
+                        cell.firstQueryLabelField.textColor = UIColor.white
+                    }
+                }
+            }
         case "ddi":cell.firstQueryLabelField.text = currencyDetails?.l[indexPath.row].ddi
             if let string = currencyDetails?.l[indexPath.row].ddi{
                 let formattedStr = string.replacingOccurrences(of: ",", with: ".")
@@ -140,7 +144,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UIPickerVi
                     }else{
                         cell.firstQueryLabelField.textColor = UIColor.white
                     }
-                    
                 }
             }
         case "low":cell.firstQueryLabelField.text = currencyDetails?.l[indexPath.row].low
@@ -155,10 +158,21 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UIPickerVi
             cell.firstQueryLabelField.text = currencyDetails?.l[indexPath.row].las
         }
         
-        
         switch UserSingleton.keyTwo {
         case "las":cell.seconQueryLabelField.text = currencyDetails?.l[indexPath.row].las
         case "pdd":cell.seconQueryLabelField.text = currencyDetails?.l[indexPath.row].pdd
+            if let string = currencyDetails?.l[indexPath.row].pdd{
+                let formattedStr = string.replacingOccurrences(of: ",", with: ".")
+                if let double = Double(String(formattedStr)){
+                    if double > 0{
+                        cell.seconQueryLabelField.textColor = UIColor.green
+                    }else if double < 0{
+                        cell.seconQueryLabelField.textColor = UIColor.red
+                    }else{
+                        cell.seconQueryLabelField.textColor = UIColor.white
+                    }
+                }
+            }
         case "ddi":cell.seconQueryLabelField.text = currencyDetails?.l[indexPath.row].ddi
             if let string = currencyDetails?.l[indexPath.row].ddi{
                 let formattedStr = string.replacingOccurrences(of: ",", with: ".")
@@ -186,15 +200,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UIPickerVi
         }
         cell.cloLabelField.text = currencyDetails?.l[indexPath.row].clo
         if currencyDetails?.l[indexPath.row].clo != followerDetails?.l[indexPath.row].clo{
-            cell.cloLabelField.font = UIFont.systemFont(ofSize: 22)
-            
-        }else {
-            cell.cloLabelField.font = UIFont.systemFont(ofSize: 15)
+            cell.backgroundColor = .gray
+        }else{
+            cell.backgroundColor = .black
         }
-        
-        
-        
-        
         
         if let string = self.currencyDetails?.l[indexPath.row].las {
             let formatted = string.replacingOccurrences(of: ".", with: "")
@@ -215,9 +224,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UIPickerVi
                 }
             }
         }
-        
-        
-        
         return cell
     }
     fileprivate func setDelegatesAndColour(){
@@ -258,35 +264,5 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UIPickerVi
         
     }
     
-
-    
-    
-
-    
 }
 
-
-
-/*
- let urlString = UrlClass().baseUrl+UrlClass().homePageHeader
- Webservice.fetchData(urlString: urlString, tableView: tableView, model: Currency.self) { currencies in
-     self.currencyArray = currencies
-     if UserSingleton.keyOne == "" && UserSingleton.keyTwo == ""{
-         UserSingleton.keyOne = "flo"
-         UserSingleton.keyTwo = "flo"
-     }
-     var urlString = UrlClass().baseUrl+UrlClass().fields+"\(UserSingleton.keyOne),\(UserSingleton.keyTwo)"+"&stcs="
-     self.currencyArray?.mypageDefaults.forEach({ key in
-         let requestKey = "\(key.tke)~"
-         urlString = urlString+requestKey
-     })
-     let cleanUrlString = String(urlString.dropLast())
-     print("kontrol: \(cleanUrlString)")
-     
-     Webservice.fetchData(urlString: cleanUrlString, tableView: self.tableView, model: Welcome.self) { details in
-         print("yes be")
-         self.currencyDetails = details
-         print("kontrol: \(details)")
-     }
- }
- */
