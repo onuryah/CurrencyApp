@@ -27,8 +27,6 @@ class ViewController: UIViewController {
         }
     }
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setDelegatesAndColour()
@@ -94,6 +92,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UIPickerVi
         label.sizeToFit()
         return label
     }
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
     }
@@ -111,6 +110,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UIPickerVi
         guard let rowCount = self.currencyArray?.mypageDefaults.count else{return 0}
             return rowCount
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CurrencyCell
         cell.currencyNameLabelField.text = currencyArray?.mypageDefaults[indexPath.row].cod
@@ -188,7 +188,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UIPickerVi
                     }
                 }
             }
-            
         case "low":cell.seconQueryLabelField.text = currencyDetails?.l[indexPath.row].low
         case "hig":cell.seconQueryLabelField.text = currencyDetails?.l[indexPath.row].hig
         case "buy":cell.seconQueryLabelField.text = currencyDetails?.l[indexPath.row].buy
