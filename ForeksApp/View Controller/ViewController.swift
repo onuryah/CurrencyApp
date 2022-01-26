@@ -51,7 +51,7 @@ class ViewController: UIViewController {
         pickerView.centerYAnchor.constraint(equalTo: vc.view.centerYAnchor).isActive = true
         vc.view.addSubview(pickerView)
         
-        let alert = UIAlertController(title: "Test", message: "Select", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Currency Properties", message: "Please Select", preferredStyle: .actionSheet)
         alert.popoverPresentationController?.sourceView = popUpButton
         alert.popoverPresentationController?.sourceRect = popUpButton.bounds
         alert.setValue(vc, forKey: "contentViewController")
